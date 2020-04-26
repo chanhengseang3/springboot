@@ -1,4 +1,4 @@
-# Nisai Core Application
+# Core Application
 
 This is api application for web and mobile
 
