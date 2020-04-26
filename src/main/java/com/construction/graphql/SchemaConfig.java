@@ -4,10 +4,12 @@ import com.construction.graphql.scalars.DurationScalar;
 import com.introproventures.graphql.jpa.query.autoconfigure.GraphQLJpaQueryProperties;
 import com.introproventures.graphql.jpa.query.autoconfigure.GraphQLSchemaConfigurer;
 import com.introproventures.graphql.jpa.query.autoconfigure.GraphQLShemaRegistration;
+import com.introproventures.graphql.jpa.query.schema.GraphQLSchemaBuilder;
 import com.introproventures.graphql.jpa.query.schema.JavaScalars;
 import com.introproventures.graphql.jpa.query.schema.impl.GraphQLJpaSchemaBuilder;
 import com.construction.graphql.generator.schema.GQLMutationSchemaBuilder;
 import graphql.schema.GraphQLSchema;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.EntityManager;
@@ -28,20 +30,20 @@ public class SchemaConfig implements GraphQLSchemaConfigurer {
         this.entityManager = entityManager;
     }
 
-    public GraphQLSchema querySchema() {
+    @Bean
+    public GraphQLSchemaBuilder querySchemaBuilder() {
         JavaScalars.register(Duration.class, new DurationScalar());
         return new GraphQLJpaSchemaBuilder(entityManager)
                 .name("CoreSchema")
                 .useDistinctParameter(properties.isUseDistinctParameter())
                 .defaultDistinct(properties.isDefaultDistinct())
                 .enableRelay(properties.isEnableRelay())
-                .toManyDefaultOptional(true)
-                .build();
+                .toManyDefaultOptional(true);
     }
 
     @Override
     public void configure(GraphQLShemaRegistration registry) {
-        registry.register(querySchema());
+        registry.register(querySchemaBuilder().build());
         registry.register(mutationSchemaBuilder.build());
     }
 }

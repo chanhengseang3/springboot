@@ -6,6 +6,6 @@ check_port()
 while true
 do
         check_port
-        nohup java -Xms1024m -Xmx1024m -jar ./build/libs/auction-0.0.1.jar &
+        nohup java -Xms1024m -Xmx1024m -XX:MaxPermSize=256m -jar ./build/libs/auction-0.0.1.jar &
         echo restarted instance
 done

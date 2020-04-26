@@ -1,7 +1,7 @@
 plugins {
-	id 'org.springframework.boot' version '2.2.2.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
-	id 'java'
+    id 'org.springframework.boot' version '2.2.2.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'java'
 }
 
 group = 'com.construction'
@@ -9,46 +9,48 @@ version = '0.0.1'
 sourceCompatibility = '11'
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 repositories {
-	mavenCentral()
-	maven {
-		url = 'https://maven.cksource.com/'
-	}
+    mavenCentral()
+    maven {
+        url = 'https://maven.cksource.com/'
+    }
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springframework.security.oauth:spring-security-oauth2:2.4.0.RELEASE'
-	implementation 'org.springframework.security:spring-security-jwt:1.0.9.RELEASE'
-	implementation 'net.coobird:thumbnailator:0.4.8'
-	implementation 'org.hibernate:hibernate-search-orm:5.11.4.Final'
-	implementation 'io.springfox:springfox-swagger2:2.9.2'
-	implementation 'io.springfox:springfox-swagger-ui:2.9.2'
-	implementation 'com.cksource:ckfinder3:3.5.1'
-	implementation 'com.github.javafaker:javafaker:1.0.2'
-	compileOnly 'org.projectlombok:lombok'
-	runtimeOnly 'mysql:mysql-connector-java'
-	annotationProcessor 'org.projectlombok:lombok'
-	implementation ('com.introproventures:graphql-jpa-query-schema:0.4.4') {
-		exclude group: "joda-time"
-		exclude group: "org.slf4j"
-		exclude group: "javax.persistence"
-		exclude group: "javax.transaction"
-		exclude group: "javax.interceptor"
-	}
-	implementation 'com.introproventures:graphql-jpa-query-autoconfigure:0.4.4'
-	implementation ('com.graphql-java:graphql-java-extended-scalars:1.0') {
-		exclude group: "com.squareup.okhttp3"
-	}
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.security.oauth:spring-security-oauth2:2.4.0.RELEASE'
+    implementation 'org.springframework.security:spring-security-jwt:1.0.9.RELEASE'
+    implementation 'net.coobird:thumbnailator:0.4.8'
+    implementation 'org.hibernate:hibernate-search-orm:5.11.4.Final'
+    implementation 'io.springfox:springfox-swagger2:2.9.2'
+    implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+    implementation 'com.cksource:ckfinder3:3.5.1'
+    compileOnly 'org.projectlombok:lombok'
+    runtimeOnly 'mysql:mysql-connector-java'
+    annotationProcessor 'org.projectlombok:lombok'
+    implementation('com.introproventures:graphql-jpa-query-schema:0.4.7') {
+        exclude group: "joda-time"
+        exclude group: "org.slf4j"
+        exclude group: "javax.persistence"
+        exclude group: "javax.transaction"
+        exclude group: "javax.interceptor"
+    }
+    implementation 'com.introproventures:graphql-jpa-query-autoconfigure:0.4.7'
+    implementation('com.introproventures:graphql-jpa-query-boot-starter:0.4.7') {
+        exclude module: 'graphql-jpa-query-web'
+    }
+    implementation('com.graphql-java:graphql-java-extended-scalars:1.0') {
+        exclude group: "com.squareup.okhttp3"
+    }
 }
 
 test {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
